@@ -55,8 +55,8 @@ namespace CSH_Lab1
 				else
 				{
 					var shape = new Rectangle { Width = double.Parse(textBox_rect_A.Text), Height = double.Parse(textBox_rect_B.Text) };
-					label_perimeter.Text = "Периметр: " + Convert.ToString(shape.calculatePerimeter());
-					label_square.Text = "Площадь: " + Convert.ToString(shape.calculateArea());
+					label_perimeter.Text = "РџРµСЂРёРјРµС‚СЂ: " + Convert.ToString(shape.calculatePerimeter());
+					label_square.Text = "РџР»РѕС‰Р°РґСЊ: " + Convert.ToString(shape.calculateArea());
 					g.DrawRectangle(Pens.Black, 500, 150, ((float)shape.Width), ((float)shape.Height));
 				}
 			}
@@ -69,8 +69,8 @@ namespace CSH_Lab1
 				else
 				{
 					var shape = new Square { Side = double.Parse(textBox_square.Text) };
-					label_perimeter.Text = "Периметр: " + Convert.ToString(shape.calculatePerimeter());
-					label_square.Text = "Площадь: " + Convert.ToString(shape.calculateArea());
+					label_perimeter.Text = "РџРµСЂРёРјРµС‚СЂ: " + Convert.ToString(shape.calculatePerimeter());
+					label_square.Text = "РџР»РѕС‰Р°РґСЊ: " + Convert.ToString(shape.calculateArea());
 					g.DrawRectangle(Pens.Black, 500, 150, ((float)shape.Side), ((float)shape.Side));
 				}
 			}
@@ -83,8 +83,8 @@ namespace CSH_Lab1
 				else
 				{
 					var shape = new Circle { Radius = double.Parse(textBox_circle.Text) };
-					label_perimeter.Text = "Периметр: " + Convert.ToString(shape.calculatePerimeter());
-					label_square.Text = "Площадь: " + Convert.ToString(shape.calculateArea());
+					label_perimeter.Text = "РџРµСЂРёРјРµС‚СЂ: " + Convert.ToString(shape.calculatePerimeter());
+					label_square.Text = "РџР»РѕС‰Р°РґСЊ: " + Convert.ToString(shape.calculateArea());
 					g.DrawEllipse(Pens.Black, 500, 150, ((float)shape.Radius), ((float)shape.Radius));
 				}
 			}
@@ -106,8 +106,8 @@ namespace CSH_Lab1
 						&& shape.GetSideBC() < shape.GetSideAB() + shape.GetSideCA()
 						&& shape.GetSideCA() < shape.GetSideAB() + shape.GetSideBC())
 					{
-						label_perimeter.Text = "Периметр: " + Convert.ToString(shape.calculatePerimeter());
-						label_square.Text = "Площадь: " + Convert.ToString(shape.calculateArea());
+						label_perimeter.Text = "РџРµСЂРёРјРµС‚СЂ: " + Convert.ToString(shape.calculatePerimeter());
+						label_square.Text = "РџР»РѕС‰Р°РґСЊ: " + Convert.ToString(shape.calculateArea());
 						double angleB = Math.Acos((shape.SideAB * shape.SideAB + shape.SideBC * shape.SideBC - shape.SideCA * shape.SideCA) / (2 * shape.SideAB * shape.SideBC));
 						var point1 = new Point(500, 150);
 						var point2 = new Point(500 + (int)shape.SideAB * 20, 150);
@@ -116,13 +116,13 @@ namespace CSH_Lab1
 					}
 					else
 					{
-						MessageBox.Show("Такого треугольника не существует", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						MessageBox.Show("РўР°РєРѕРіРѕ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚", "РћС€РёР±РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
 			}
 			if (is_empty)
 			{
-				MessageBox.Show("Вы не ввели данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Р’С‹ РЅРµ РІРІРµР»Рё РґР°РЅРЅС‹Рµ", "РћС€РёР±РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
