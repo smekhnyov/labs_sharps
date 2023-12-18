@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Theater.DAL;
 using Theater.Models;
@@ -14,16 +10,18 @@ namespace Theater.Controllers
     public class EmployeeController : Controller
     {
 		private readonly GenericRepository<Employee> repo;
+		private readonly GenericRepository<EmployeeDetails> DetailsRepo;
 
 		public EmployeeController()
 		{
 			repo = new GenericRepository<Employee>(new TheaterContext());
+			DetailsRepo = new GenericRepository<EmployeeDetails>(new TheaterContext());
 		}
 
 		// GET: Employee
 		public ActionResult Index()
         {
-            return View(repo.GetAll());
+            return View(repo.GetAll().Include(e => e.EmployeeDetails).ToList());
         }
 
         // GET: Employee/Details/5
@@ -52,12 +50,15 @@ namespace Theater.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,Birthday,Email")] Employee employee)
+        public ActionResult Create([Bind(Include = "EmployeeId,FirstName,LastName,EmployeeDetails")] Employee employee, [Bind(Include = "EmployeeDetailsId,Address,PhoneNumber,Birthday")] EmployeeDetails employeeDetails)
         {
             if (ModelState.IsValid)
             {
+				employee.EmployeeDetails = employeeDetails;
 				repo.Insert(employee);
+				DetailsRepo.Insert(employeeDetails);
 				repo.Save();
+                DetailsRepo.Save();
 				return RedirectToAction("Index");
             }
 
@@ -84,12 +85,16 @@ namespace Theater.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployeeId,FirstName,LastName,Birthday,Email")] Employee employee)
+        public ActionResult Edit([Bind(Include = "EmployeeId,FirstName,LastName,EmployeeDetails")] Employee employee, [Bind(Include = "EmployeeDetailsId,Address,PhoneNumber,Birthday")] EmployeeDetails employeeDetails)
         {
             if (ModelState.IsValid)
             {
+				employeeDetails.EmployeeDetailsId = employee.EmployeeId;
+				employee.EmployeeDetails = employeeDetails;
 				repo.Update(employee);
+                DetailsRepo.Update(employeeDetails);
 				repo.Save();
+                DetailsRepo.Save();
 				return RedirectToAction("Index");
             }
             return View(employee);

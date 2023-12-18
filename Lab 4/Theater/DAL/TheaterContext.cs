@@ -16,6 +16,7 @@ namespace Theater.DAL
 		}
 
 		public DbSet<Employee> Employees { get; set; }
+		public DbSet<EmployeeDetails> EmployeeDetails { get; set; }
 		public DbSet<Event> Events { get; set; }
 		public DbSet<Seat> Seats { get; set; }
 		public DbSet<Session> Sessions { get; set; }
@@ -43,6 +44,21 @@ namespace Theater.DAL
 				.HasMany(e => e.Sessions)
 				.WithRequired(s => s.Hall)
 				.WillCascadeOnDelete(true);
+
+			optionsBuilder.Entity<Employee>()
+				.HasRequired(e => e.EmployeeDetails)
+				.WithRequiredPrincipal(e => e.Employee)
+				.WillCascadeOnDelete(true);
+
+			optionsBuilder.Entity<Event>()
+				.HasMany(e => e.Halls)
+				.WithMany(h => h.Events)
+				.Map(m =>
+				{
+					m.ToTable("EventHall");
+					m.MapLeftKey("EventId");
+					m.MapRightKey("HallId");
+				});
 
 			// Configure your database connection here
 			optionsBuilder.Conventions.Remove<PluralizingTableNameConvention>();

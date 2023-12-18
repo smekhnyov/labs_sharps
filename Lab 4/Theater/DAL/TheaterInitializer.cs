@@ -12,19 +12,10 @@ namespace Theater.DAL
 	{
 		protected override void Seed(TheaterContext context)
 		{
-			var employees = new List<Employee>
-			{
-				new Employee { FirstName = "John", LastName = "Doe", Birthday = new DateTime(1980, 1, 1), Email = "john.doe@example.com" },
-				new Employee { FirstName = "Jane", LastName = "Smith", Birthday = new DateTime(1985, 5, 5), Email = "jane.smith@example.com" },
-			};
-
-			employees.ForEach(s => context.Employees.Add(s));
-			context.SaveChanges();
-
 			var events = new List<Event>
 			{
-				new Event { Name = "Opera Night", Date = new DateTime(2023, 12, 15, 20, 30, 00), Type = Type.opera, Duration = TimeSpan.FromHours(2) },
-				new Event { Name = "Ballet Gala", Date = new DateTime(2023, 12, 20, 19, 00, 00), Type = Type.ballet, Duration = TimeSpan.FromHours(1.5) },
+				new Event { Name = "Opera Night", Type = Type.opera, Duration = TimeSpan.FromHours(2) },
+				new Event { Name = "Ballet Gala", Type = Type.ballet, Duration = TimeSpan.FromHours(1.5) },
             };
 
 			events.ForEach(s => context.Events.Add(s));
@@ -64,6 +55,17 @@ namespace Theater.DAL
             };
 
 			tickets.ForEach(s => context.Tickets.Add(s));
+			context.SaveChanges();
+
+			var employees = new List<Employee>
+			{
+				new Employee { FirstName = "John", LastName = "Doe",
+					EmployeeDetails = new EmployeeDetails { Address = "Voronezh", PhoneNumber = "+7 (222) 222-22-22", Birthday = new DateTime(2003, 9, 10)} },
+				new Employee { FirstName = "Jane", LastName = "Smith",
+					EmployeeDetails = new EmployeeDetails { Address = "Moscow", PhoneNumber = "+7 (111) 111-11-11", Birthday = new DateTime(2002, 12, 22) } },
+			};
+
+			employees.ForEach(s => context.Employees.Add(s));
 			context.SaveChanges();
 		}
 	}

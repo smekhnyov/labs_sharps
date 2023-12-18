@@ -21,5 +21,7 @@ namespace Theater.Models
 		public int SizeHall { get; set; }
 
 		public List<Session> Sessions { get; set; }
+
+		public List<Event> Events { get; set; }
 	}
 }

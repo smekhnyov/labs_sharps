@@ -53,7 +53,7 @@ namespace Theater.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EventId,Name,Date,Type,Duration")] Event @event)
+        public ActionResult Create([Bind(Include = "EventId,Name,Type,Duration")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Theater.Controllers
         // сведения см. в разделе https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EventId,Name,Date,Type,Duration")] Event @event)
+        public ActionResult Edit([Bind(Include = "EventId,Name,Type,Duration")] Event @event)
         {
             if (ModelState.IsValid)
             {

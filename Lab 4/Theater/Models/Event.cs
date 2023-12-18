@@ -20,11 +20,6 @@ namespace Theater.Models
 		public string Name { get; set; }
 
 		[Required]
-		[DataType(DataType.DateTime)]
-		[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}", ApplyFormatInEditMode = true)]
-		public DateTime Date { get; set; }
-
-		[Required]
 		public Type? Type { get; set; } // 'opera' or 'ballet'
 
 		[Required]
@@ -32,5 +27,7 @@ namespace Theater.Models
 
 		[ForeignKey("EventId")]
 		public List<Session> Sessions { get; set; }
+
+		public List<Hall> Halls { get; set; }
 	}
 }
