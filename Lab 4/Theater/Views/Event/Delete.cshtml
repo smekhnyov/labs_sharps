@@ -1,0 +1,50 @@
+﻿@model Theater.Models.Event
+
+@{
+	ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Вы уверены, что хотите удалить эту запись?</h3>
+<h3>Предупреждение: изменения также произойдут и в друих связанных таблицах</h3>
+<div>
+	<h4>Event</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Type)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Type)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Duration)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Duration)
+		</dd>
+
+	</dl>
+
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn btn-default" /> |
+			@Html.ActionLink("Back to List", "Index")
+		</div>
+	}
+</div>
